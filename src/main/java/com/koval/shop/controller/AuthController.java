@@ -25,6 +25,12 @@ public class AuthController {
         this.authenticationService = authenticationService;
     }
 
+    /**
+     * Handles user signin.
+     *
+     * @param request the signin request
+     * @return a response entity containing the JWT authentication response
+     */
     @PostMapping("/signin")
     public ResponseEntity<JwtAuthenticationResponse> signin(@Valid @RequestBody SigninRequest request) {
         log.debug("AuthController starts proceed signin with request={}", request);

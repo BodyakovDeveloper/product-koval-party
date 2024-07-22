@@ -33,6 +33,12 @@ public class CategoryServiceImpl implements CategoryService {
         this.categoryMapper = categoryMapper;
     }
 
+    /**
+     * Creates a new category.
+     *
+     * @param createCategoryRequest the request to create a new category
+     * @return the created category response
+     */
     @Override
     @Modifying
     @Transactional
@@ -48,6 +54,13 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryResponse;
     }
 
+
+    /**
+     * Retrieves a category by its ID, including its products.
+     *
+     * @param categoryId the ID of the category
+     * @return the category with products response
+     */
     @Override
     public CategoryWithProductsResponse getByIdWithProducts(UUID categoryId) {
         log.debug("Start CategoryServiceImpl getById service with categoryId: {}", categoryId);
@@ -62,6 +75,13 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryResponse;
     }
 
+    /**
+     * Updates the logo of an existing category.
+     *
+     * @param categoryId the ID of the category
+     * @param logo the new logo file
+     * @return the updated category response
+     */
     @Override
     @Modifying
     @Transactional
@@ -84,6 +104,12 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryMapper.toCategoryResponse(categoryEntity);
     }
 
+
+    /**
+     * Deletes a category by its ID.
+     *
+     * @param categoryId the ID of the category
+     */
     @Override
     public void delete(UUID categoryId) {
         log.debug("Start CategoryServiceImpl delete category with id: {}", categoryId);
@@ -97,6 +123,12 @@ public class CategoryServiceImpl implements CategoryService {
         log.debug("End CategoryServiceImpl delete category with id: {}", categoryId);
     }
 
+    /**
+     * Retrieves paginated categories.
+     *
+     * @param pageRequest the page request
+     * @return a page of category responses
+     */
     @Transactional(readOnly = true)
     @Override
     public Page<CategoryResponse> getPaginatedCategories(Pageable pageRequest) {

@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,10 +32,16 @@ public class ProductController {
     private final ProductService productService;
     private static final Logger log = LoggerFactory.getLogger(ProductController.class);
 
-    public ProductController(com.koval.shop.service.api.ProductService productService) {
+    public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
+    /**
+     * Retrieves a product by its ID.
+     *
+     * @param productId the ID of the product
+     * @return a response entity containing the product response
+     */
     @GetMapping("{productId}")
     @PreAuthorize("hasAnyRole('USER', 'EDITOR')")
     public ResponseEntity<ProductResponse> getProductById(@PathVariable UUID productId) {
@@ -48,6 +53,12 @@ public class ProductController {
         return ResponseEntity.ok().body(product);
     }
 
+    /**
+     * Retrieves paginated products. Additional info for pagination also included.
+     *
+     * @param pageRequest the page request
+     * @return a page of product responses
+     */
     @GetMapping
     @PreAuthorize("hasAnyRole('USER', 'EDITOR')")
     public Page<ProductResponse> getPaginatedProducts(Pageable pageRequest) {
@@ -59,6 +70,12 @@ public class ProductController {
         return products;
     }
 
+    /**
+     * Searches for products byr productName and categoryNames.
+     *
+     * @param productSearchRequest the product search request
+     * @return a response entity containing the list of found products
+     */
     @GetMapping("search")
     @PreAuthorize("hasAnyRole('USER', 'EDITOR')")
     public ResponseEntity<List<ProductResponse>> searchProducts(ProductSearchRequest productSearchRequest) {
@@ -70,6 +87,12 @@ public class ProductController {
         return ResponseEntity.ok(ProductResponses);
     }
 
+    /**
+     * Updates a product's name and logo.
+     *
+     * @param updateProductRequest the update product request
+     * @return a response entity containing the updated product response
+     */
     @PutMapping
     @PreAuthorize("hasRole('EDITOR')")
     public ResponseEntity<ProductResponse> updateProduct(@Valid @RequestBody UpdateProductRequest updateProductRequest) {
@@ -81,6 +104,12 @@ public class ProductController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Deletes a product by its ID.
+     *
+     * @param productId the ID of the product
+     * @return a response entity indicating the deletion result
+     */
     @DeleteMapping
     @PreAuthorize("hasRole('EDITOR')")
     public ResponseEntity<?> deleteProduct(@RequestParam("productId") UUID productId) {

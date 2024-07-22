@@ -37,6 +37,12 @@ public class ProductServiceImpl implements ProductService {
         this.productMapper = productMapper;
     }
 
+    /**
+     * Retrieves a product by its ID.
+     *
+     * @param productId the ID of the product
+     * @return the product response
+     */
     @Override
     @Transactional(readOnly = true)
     public ProductResponse getById(UUID productId) {
@@ -48,6 +54,12 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.toProductResponse(productEntity);
     }
 
+    /**
+     * Retrieves paginated products, including their logos.
+     *
+     * @param pageable the pagination information
+     * @return a page of product responses
+     */
     @Override
     @Transactional(readOnly = true)
     public Page<ProductResponse> getPaginatedProductsWithLogos(Pageable pageable) {
@@ -61,6 +73,12 @@ public class ProductServiceImpl implements ProductService {
         return new PageImpl<>(ProductResponses, pageable, productEntities.size());
     }
 
+    /**
+     * Updates an existing product.
+     *
+     * @param updateProductRequest the update product request
+     * @return the updated product response
+     */
     @Override
     @Modifying
     @Transactional
@@ -90,6 +108,12 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.toProductResponse(productEntity);
     }
 
+    /**
+     * Searches for products based on the given search criteria.
+     *
+     * @param productSearchRequest the product search request
+     * @return the list of found products
+     */
     @Override
     @Transactional(readOnly = true)
     public List<ProductResponse> searchProducts(ProductSearchRequest productSearchRequest) {
@@ -101,13 +125,18 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.toProductResponse(products);
     }
 
+    /**
+     * Deletes a product by its ID.
+     *
+     * @param productId the ID of the product
+     */
     @Override
-    public void delete(UUID categoryId) {
+    public void delete(UUID productId) {
 
-        if (Boolean.FALSE.equals(productRepository.existsById(categoryId))) {
+        if (Boolean.FALSE.equals(productRepository.existsById(productId))) {
             throw new CategoryNotFoundException(
-                    String.format("Category with id: %s not found", categoryId));
+                    String.format("Category with id: %s not found", productId));
         }
-        productRepository.deleteById(categoryId);
+        productRepository.deleteById(productId);
     }
 }

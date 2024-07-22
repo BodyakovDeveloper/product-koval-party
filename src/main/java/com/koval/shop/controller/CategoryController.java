@@ -38,6 +38,12 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    /**
+     * Creates a new category.
+     *
+     * @param createCategoryRequest the request to create a category
+     * @return a response entity containing the created category response
+     */
     @PostMapping
     @PreAuthorize("hasAnyRole('EDITOR')")
     public ResponseEntity<CategoryResponse> create(@RequestBody CreateCategoryRequest createCategoryRequest) {
@@ -49,6 +55,12 @@ public class CategoryController {
         return ResponseEntity.ok(category);
     }
 
+    /**
+     * Retrieves a category by its ID.
+     *
+     * @param categoryId the ID of the category
+     * @return a response entity containing the category with products response
+     */
     @GetMapping("{categoryId}")
     @PreAuthorize("hasAnyRole('USER', 'EDITOR')")
     public ResponseEntity<CategoryWithProductsResponse> getById(@PathVariable UUID categoryId) {
@@ -60,6 +72,12 @@ public class CategoryController {
         return ResponseEntity.ok(category);
     }
 
+    /**
+     * Retrieves paginated categories.
+     *
+     * @param pageRequest the page request
+     * @return a page of category responses
+     */
     @GetMapping
     @PreAuthorize("hasAnyRole('USER', 'EDITOR')")
     public Page<CategoryResponse> getPaginatedCategories(Pageable pageRequest) {
@@ -71,6 +89,13 @@ public class CategoryController {
         return categories;
     }
 
+    /**
+     * Updates the logo of a category.
+     *
+     * @param categoryId the ID of the category
+     * @param logo the new logo file
+     * @return a response entity containing the updated category response
+     */
     @PatchMapping(consumes = {"multipart/form-data"})
     @PreAuthorize("hasRole('EDITOR')")
     public ResponseEntity<CategoryResponse> update(@RequestParam("categoryId") UUID categoryId,
@@ -83,6 +108,12 @@ public class CategoryController {
         return ResponseEntity.ok(categoryResponse);
     }
 
+    /**
+     * Deletes a category by its ID.
+     *
+     * @param categoryId the ID of the category
+     * @return a response entity indicating the deletion result
+     */
     @DeleteMapping
     @PreAuthorize("hasRole('EDITOR')")
     public ResponseEntity<?> delete(@RequestParam("categoryId") UUID categoryId) {
