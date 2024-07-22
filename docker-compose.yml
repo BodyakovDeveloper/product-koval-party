@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  database:
+    container_name: postgres
+    image: postgres:15.0-alpine
+    restart: on-failure
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=shop-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database:/var/lib/database
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}'"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+  app:
+    container_name: app
+    depends_on:
+      database:
+        condition: service_healthy
+    build: .
+    restart: on-failure
+    volumes:
+      - /my/project/dir:/app
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/shop-db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=root

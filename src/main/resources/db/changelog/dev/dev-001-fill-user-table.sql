@@ -1,0 +1,2 @@
+INSERT INTO user_account (id, username, password, role) VALUES ('0190cadf-2d20-7ed5-bc76-f10deca5a5af', 'editor', '$2y$10$axATiUBlD3fYHu0/PMwBb.N5AC9J9ky5ZjWc6IXD5em..wRDAbIki', 'ROLE_EDITOR');
+INSERT INTO user_account (id, username, password, role) VALUES ('0190cae0-4093-708b-8bbd-bd7752d213a9', 'user', '$2y$10$axATiUBlD3fYHu0/PMwBb.N5AC9J9ky5ZjWc6IXD5em..wRDAbIki', 'ROLE_USER');

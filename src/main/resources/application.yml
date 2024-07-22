@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/product-db
+    username: postgres
+    password: root
+  liquibase:
+    enabled: true
+    contexts: dev
+  jpa:
+    show-sql: true
+  servlet:
+    multipart:
+      max-request-size: 10MB
+      max-file-size: 10MB
+
+logging:
+  level:
+    root: INFO
+    com:
+      koval: DEBUG
+  file:
+    name: logs/app.log
+
+springdoc:
+  swagger-ui:
+    tagsSorter: alpha
+
+token:
+  signing:
+    key: 413F4428472B4B6250655368566D5970337336763979244226452948404D6351

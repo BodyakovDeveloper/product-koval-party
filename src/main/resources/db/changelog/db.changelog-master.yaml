@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/001-create-user-account-table.sql
+      author: 'Bohdan Koval'
+  - include:
+      file: db/changelog/002-create-category-table.sql
+      author: 'Bohdan Koval'
+  - include:
+      file: db/changelog/003-create-product-table.sql
+      author: 'Bohdan Koval'
+
+  - include:
+      file: db/changelog/dev/dev-001-fill-user-table.sql
+      author: 'Bohdan Koval'
+      context: dev
+  - include:
+      file: db/changelog/dev/dev-002-fill-category-table.sql
+      author: 'Bohdan Koval'
+      context: dev
+  - include:
+      file: db/changelog/dev/dev-003-fill-product-table.sql
+      author: 'Bohdan Koval'
+      context: dev
