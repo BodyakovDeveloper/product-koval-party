@@ -1,6 +1,5 @@
 package com.koval.shop.service.impl;
 
-import com.koval.shop.exception.CategoryNotFoundException;
 import com.koval.shop.exception.ImageProcessingException;
 import com.koval.shop.exception.ProductNotFoundException;
 import com.koval.shop.mapper.ProductMapper;
@@ -134,7 +133,7 @@ public class ProductServiceImpl implements ProductService {
     public void delete(UUID productId) {
 
         if (Boolean.FALSE.equals(productRepository.existsById(productId))) {
-            throw new CategoryNotFoundException(
+            throw new ProductNotFoundException(
                     String.format("Category with id: %s not found", productId));
         }
         productRepository.deleteById(productId);

@@ -7,7 +7,6 @@ import com.koval.shop.payload.response.CategoryResponse;
 import com.koval.shop.payload.response.CategoryWithProductsResponse;
 import com.koval.shop.payload.response.ProductResponse;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 @Mapper
 public interface CategoryMapper {

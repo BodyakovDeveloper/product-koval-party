@@ -14,4 +14,6 @@ public interface ProductMapper {
     ProductResponse toProductResponse(ProductEntity ProductEntity);
 
     List<ProductResponse> toProductResponse(List<ProductEntity> ProductEntity);
+
+    List<ProductResponse> toProductResponseList(List<ProductEntity> productEntities);
 }

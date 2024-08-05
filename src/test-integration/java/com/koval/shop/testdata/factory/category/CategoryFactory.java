@@ -12,7 +12,6 @@ public class CategoryFactory {
                 .build();
     }
 
-
     public static CreateCategoryRequest buildCreateCategoryRequest() {
         return CreateCategoryRequest.builder()
                 .name("category to save")

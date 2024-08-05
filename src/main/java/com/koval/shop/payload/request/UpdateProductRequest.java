@@ -15,6 +15,12 @@ public class UpdateProductRequest {
 
     }
 
+    private UpdateProductRequest(UpdateProductRequest.Builder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.logo = builder.logo;
+    }
+
     public UUID getId() {
         return id;
     }
@@ -61,5 +67,38 @@ public class UpdateProductRequest {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public static class Builder {
+        private UUID id;
+        private String name;
+        private MultipartFile logo;
+
+        public Builder() {
+
+        }
+
+        public UpdateProductRequest.Builder id(UUID id) {
+            this.id = id;
+            return this;
+        }
+
+        public UpdateProductRequest.Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public UpdateProductRequest.Builder logo(MultipartFile logo) {
+            this.logo = logo;
+            return this;
+        }
+
+        public UpdateProductRequest build() {
+            return new UpdateProductRequest(this);
+        }
+    }
+
+    public static UpdateProductRequest.Builder builder() {
+        return new UpdateProductRequest.Builder();
     }
 }

@@ -1,6 +1,5 @@
 package com.koval.shop.controller;
 
-
 import com.koval.shop.testdata.initializer.PostgresContainerInitializer;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;

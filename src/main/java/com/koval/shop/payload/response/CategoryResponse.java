@@ -13,6 +13,12 @@ public class CategoryResponse {
 
     }
 
+    private CategoryResponse(CategoryResponse.Builder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.logo = builder.logo;
+    }
+
     public UUID getId() {
         return id;
     }
@@ -59,5 +65,39 @@ public class CategoryResponse {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+
+    public static class Builder {
+        private UUID id;
+        private String name;
+        private byte[] logo;
+
+        public Builder() {
+
+        }
+
+        public CategoryResponse.Builder id(UUID id) {
+            this.id = id;
+            return this;
+        }
+
+        public CategoryResponse.Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public CategoryResponse.Builder logo(byte[] logo) {
+            this.logo = logo;
+            return this;
+        }
+
+        public CategoryResponse build() {
+            return new CategoryResponse(this);
+        }
+    }
+
+    public static CategoryResponse.Builder builder() {
+        return new CategoryResponse.Builder();
     }
 }

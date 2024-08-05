@@ -21,6 +21,12 @@ public class ProductResponse {
         this.category = category;
     }
 
+    private ProductResponse(ProductResponse.Builder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.category = builder.category;
+    }
+
     public UUID getId() {
         return id;
     }
