@@ -1,12 +1,12 @@
 package com.koval.shop.repository;
 
-import com.koval.shop.model.User;
+import com.koval.shop.model.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 import java.util.UUID;
 
-public interface UserRepository extends JpaRepository<User, UUID> {
+public interface UserRepository extends JpaRepository<UserEntity, UUID> {
 
-    Optional<User> findByUsername(String username);
+    Optional<UserEntity> findByUsername(String username);
 }

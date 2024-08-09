@@ -1,4 +1,4 @@
-package com.koval.shop.exceptionhandler;
+package com.koval.shop.exception.exceptionhandler;
 
 import com.koval.shop.exception.CategoryNotFoundException;
 import com.koval.shop.exception.ImageProcessingException;

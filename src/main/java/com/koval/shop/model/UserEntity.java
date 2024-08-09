@@ -19,7 +19,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "user_account")
-public class User implements UserDetails {
+public class UserEntity implements UserDetails {
 
     @Id
     @GeneratedValue(generator = "uuid7")
@@ -34,7 +34,7 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public User() {
+    public UserEntity() {
 
     }
 
@@ -77,8 +77,8 @@ public class User implements UserDetails {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id);
+        UserEntity userEntity = (UserEntity) o;
+        return Objects.equals(id, userEntity.id);
     }
 
     public UUID getId() {

@@ -1,6 +1,6 @@
 package com.koval.shop.security.service.impl;
 
-import com.koval.shop.model.User;
+import com.koval.shop.model.UserEntity;
 import com.koval.shop.payload.request.SigninRequest;
 import com.koval.shop.payload.response.JwtAuthenticationResponse;
 import com.koval.shop.repository.UserRepository;
@@ -30,7 +30,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
         );
 
-        User user = userRepository.findByUsername(request.getUsername())
+        UserEntity user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid email or password."));
 
         String jwt = jwtService.generateToken(user);
