@@ -1,6 +1,6 @@
 package com.koval.shop.annotation;
 
-import com.koval.shop.service.hibernate.UUIDVersion7GeneratorService;
+import com.koval.shop.service.core.hibernate.UUIDVersion7GeneratorService;
 import org.hibernate.annotations.IdGeneratorType;
 
 import java.lang.annotation.Retention;

@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public interface ProductService {
 
-    ProductResponse getById(UUID id);
+    ProductResponse getProductById(UUID id);
 
     Page<ProductResponse> getPaginatedProductsWithLogos(Pageable pageable);
 
@@ -19,5 +19,5 @@ public interface ProductService {
 
     List<ProductResponse> searchProducts(ProductSearchRequest productSearchRequest);
 
-    void delete(UUID categoryId);
+    void deleteProduct(UUID categoryId);
 }

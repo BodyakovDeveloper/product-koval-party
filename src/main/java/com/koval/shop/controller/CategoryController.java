@@ -49,7 +49,7 @@ public class CategoryController {
     public ResponseEntity<CategoryResponse> create(@RequestBody CreateCategoryRequest createCategoryRequest) {
         log.debug("CategoryController createCategory starts with pageRequest={}", createCategoryRequest);
 
-        CategoryResponse category = categoryService.create(createCategoryRequest);
+        CategoryResponse category = categoryService.createCategory(createCategoryRequest);
 
         log.debug("categoryController createCategory ends, returning category={}", category);
         return ResponseEntity.ok(category);
@@ -66,7 +66,7 @@ public class CategoryController {
     public ResponseEntity<CategoryWithProductsResponse> getById(@PathVariable UUID categoryId) {
         log.debug("CategoryController getCategory starts with categoryId={}", categoryId);
 
-        CategoryWithProductsResponse category = categoryService.getByIdWithProducts(categoryId);
+        CategoryWithProductsResponse category = categoryService.getCategoryByIdWithProducts(categoryId);
 
         log.debug("categoryController getCategory ends, returning categories={}", category);
         return ResponseEntity.ok(category);
@@ -102,7 +102,7 @@ public class CategoryController {
                                                            @ValidLogo @RequestParam("logo") MultipartFile logo) {
         log.debug("CategoryController updateCategory starts with categoryId={} and logo={}", categoryId, logo.getOriginalFilename());
 
-        CategoryResponse categoryResponse = categoryService.updateLogo(categoryId, logo);
+        CategoryResponse categoryResponse = categoryService.updateCategoryLogo(categoryId, logo);
 
         log.debug("CategoryController updateCategory ends, returning categoryResponse={}", categoryResponse);
         return ResponseEntity.ok(categoryResponse);
@@ -119,7 +119,7 @@ public class CategoryController {
     public ResponseEntity<?> delete(@RequestParam("categoryId") UUID categoryId) {
         log.debug("CategoryController deleteCategory starts with categoryId={}", categoryId);
 
-        categoryService.delete(categoryId);
+        categoryService.deleteCategory(categoryId);
 
         log.debug("CategoryController deleteCategory ends with categoryId={}", categoryId);
         return ResponseEntity.accepted().build();

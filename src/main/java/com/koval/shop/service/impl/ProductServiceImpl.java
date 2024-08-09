@@ -1,5 +1,6 @@
 package com.koval.shop.service.impl;
 
+import com.koval.shop.annotation.Logging;
 import com.koval.shop.exception.ImageProcessingException;
 import com.koval.shop.exception.ProductNotFoundException;
 import com.koval.shop.mapper.ProductMapper;
@@ -42,9 +43,10 @@ public class ProductServiceImpl implements ProductService {
      * @param productId the ID of the product
      * @return the product response
      */
+    @Logging
     @Override
     @Transactional(readOnly = true)
-    public ProductResponse getById(UUID productId) {
+    public ProductResponse getProductById(UUID productId) {
         log.debug("Start getting products from productId={}", productId);
 
         ProductEntity productEntity = productRepository.findById(productId)
@@ -59,6 +61,7 @@ public class ProductServiceImpl implements ProductService {
      * @param pageable the pagination information
      * @return a page of product responses
      */
+    @Logging
     @Override
     @Transactional(readOnly = true)
     public Page<ProductResponse> getPaginatedProductsWithLogos(Pageable pageable) {
@@ -78,6 +81,7 @@ public class ProductServiceImpl implements ProductService {
      * @param updateProductRequest the update product request
      * @return the updated product response
      */
+    @Logging
     @Override
     @Modifying
     @Transactional
@@ -113,6 +117,7 @@ public class ProductServiceImpl implements ProductService {
      * @param productSearchRequest the product search request
      * @return the list of found products
      */
+    @Logging
     @Override
     @Transactional(readOnly = true)
     public List<ProductResponse> searchProducts(ProductSearchRequest productSearchRequest) {
@@ -129,8 +134,9 @@ public class ProductServiceImpl implements ProductService {
      *
      * @param productId the ID of the product
      */
+    @Logging
     @Override
-    public void delete(UUID productId) {
+    public void deleteProduct(UUID productId) {
 
         if (Boolean.FALSE.equals(productRepository.existsById(productId))) {
             throw new ProductNotFoundException(

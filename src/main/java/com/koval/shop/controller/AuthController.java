@@ -33,7 +33,7 @@ public class AuthController {
      */
     @PostMapping("/signin")
     public ResponseEntity<JwtAuthenticationResponse> signin(@Valid @RequestBody SigninRequest request) {
-        log.debug("AuthController starts proceed signin with request={}", request);
+        log.debug("AuthController starts proceed signin with username={}", request.getUsername());
         JwtAuthenticationResponse signin = authenticationService.signin(request);
         log.debug("AuthController ends, returning responseEntity={}", signin);
         return ResponseEntity.ok(signin);

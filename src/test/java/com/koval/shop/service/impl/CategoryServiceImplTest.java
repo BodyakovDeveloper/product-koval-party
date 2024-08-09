@@ -40,7 +40,7 @@ class CategoryServiceImplTest {
 
 
     @Test
-    void createCategory_shouldReturnCategoryResponse_whenValidRequest() {
+    void createCategoryCategory_shouldReturnCategoryResponse_whenValidRequest() {
 
         CategoryEntity categoryEntity = createCategoryEntity();
         CategoryResponse categoryResponse = createCategoryResponse();
@@ -50,7 +50,7 @@ class CategoryServiceImplTest {
         when(categoryRepository.save(any(CategoryEntity.class))).thenReturn(categoryEntity);
         when(categoryMapper.toCategoryResponse(any(CategoryEntity.class))).thenReturn(categoryResponse);
 
-        CategoryResponse response = categoryService.create(createCategoryRequest);
+        CategoryResponse response = categoryService.createCategory(createCategoryRequest);
 
         verify(categoryMapper).toCategory(createCategoryRequest);
         verify(categoryRepository).save(categoryEntity);
@@ -59,14 +59,14 @@ class CategoryServiceImplTest {
     }
 
     @Test
-    void getByIdWithProducts_shouldReturnCategoryWithProductsResponse_whenCategoryExists() {
+    void getCategoryByIdWithProducts_shouldReturnCategoryWithProductsResponse_whenCategoryExists() {
         CategoryEntity categoryEntity = createCategoryEntity();
         CategoryWithProductsResponse categoryWithProductsResponse = createCategoryWithProductsResponse();
         UUID categoryId = UUID.randomUUID();
         when(categoryRepository.findByIdWithProducts(categoryId)).thenReturn(Optional.of(categoryEntity));
         when(categoryMapper.toCategoryWithProductsResponse(any(CategoryEntity.class))).thenReturn(categoryWithProductsResponse);
 
-        CategoryWithProductsResponse response = categoryService.getByIdWithProducts(categoryId);
+        CategoryWithProductsResponse response = categoryService.getCategoryByIdWithProducts(categoryId);
 
         verify(categoryRepository).findByIdWithProducts(categoryId);
         verify(categoryMapper).toCategoryWithProductsResponse(categoryEntity);
@@ -74,32 +74,32 @@ class CategoryServiceImplTest {
     }
 
     @Test
-    void getByIdWithProducts_shouldThrowCategoryNotFoundException_whenCategoryDoesNotExist() {
+    void getCategoryByIdWithProducts_shouldThrowCategoryNotFoundException_whenCategoryDoesNotExist() {
         UUID categoryId = UUID.randomUUID();
         when(categoryRepository.findByIdWithProducts(categoryId)).thenReturn(Optional.empty());
 
-        assertThrows(CategoryNotFoundException.class, () -> categoryService.getByIdWithProducts(categoryId));
+        assertThrows(CategoryNotFoundException.class, () -> categoryService.getCategoryByIdWithProducts(categoryId));
 
         verify(categoryRepository).findByIdWithProducts(categoryId);
     }
 
     @Test
-    void deleteCategory_shouldDeleteCategory_whenCategoryExists() {
+    void deleteCategory_shouldDeleteCategoryCategory_whenCategoryExists() {
         UUID categoryId = UUID.randomUUID();
         when(categoryRepository.existsById(categoryId)).thenReturn(true);
 
-        categoryService.delete(categoryId);
+        categoryService.deleteCategory(categoryId);
 
         verify(categoryRepository).existsById(categoryId);
         verify(categoryRepository).deleteById(categoryId);
     }
 
     @Test
-    void deleteCategory_shouldThrowCategoryNotFoundException_whenCategoryDoesNotExist() {
+    void deleteCategoryCategory_shouldThrowCategoryNotFoundException_whenCategoryDoesNotExist() {
         UUID categoryId = UUID.randomUUID();
         when(categoryRepository.existsById(categoryId)).thenReturn(false);
 
-        assertThrows(CategoryNotFoundException.class, () -> categoryService.delete(categoryId));
+        assertThrows(CategoryNotFoundException.class, () -> categoryService.deleteCategory(categoryId));
 
         verify(categoryRepository).existsById(categoryId);
     }

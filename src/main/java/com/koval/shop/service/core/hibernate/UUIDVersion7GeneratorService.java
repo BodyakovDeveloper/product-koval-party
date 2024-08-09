@@ -1,4 +1,4 @@
-package com.koval.shop.service.hibernate;
+package com.koval.shop.service.core.hibernate;
 
 import com.fasterxml.uuid.Generators;
 import org.hibernate.HibernateException;

@@ -11,13 +11,13 @@ import java.util.UUID;
 
 public interface CategoryService {
 
-    CategoryResponse create(CreateCategoryRequest createCategoryRequest);
+    CategoryResponse createCategory(CreateCategoryRequest createCategoryRequest);
 
-    CategoryWithProductsResponse getByIdWithProducts(UUID categoryId);
+    CategoryWithProductsResponse getCategoryByIdWithProducts(UUID categoryId);
 
     Page<CategoryResponse> getPaginatedCategories(Pageable pageRequest);
 
-    CategoryResponse updateLogo(UUID categoryId, MultipartFile logo);
+    CategoryResponse updateCategoryLogo(UUID categoryId, MultipartFile logo);
 
-    void delete(UUID categoryId);
+    void deleteCategory(UUID categoryId);
 }

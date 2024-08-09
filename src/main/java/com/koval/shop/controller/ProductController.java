@@ -47,7 +47,7 @@ public class ProductController {
     public ResponseEntity<ProductResponse> getProductById(@PathVariable UUID productId) {
         log.debug("ProductController getProducts starts with productId={}", productId);
 
-        ProductResponse product = productService.getById(productId);
+        ProductResponse product = productService.getProductById(productId);
 
         log.debug("ProductController getProducts ends, returning product={}", product);
         return ResponseEntity.ok().body(product);
@@ -115,7 +115,7 @@ public class ProductController {
     public ResponseEntity<?> deleteProduct(@RequestParam("productId") UUID productId) {
         log.debug("ProductController deleteCategory starts with productId={}", productId);
 
-        productService.delete(productId);
+        productService.deleteProduct(productId);
 
         log.debug("ProductController deleteCategory ends with productId={}", productId);
         return ResponseEntity.accepted().build();

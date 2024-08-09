@@ -1,5 +1,6 @@
 package com.koval.shop.service.impl;
 
+import com.koval.shop.annotation.Logging;
 import com.koval.shop.exception.CategoryNotFoundException;
 import com.koval.shop.exception.ImageProcessingException;
 import com.koval.shop.mapper.CategoryMapper;
@@ -39,10 +40,11 @@ public class CategoryServiceImpl implements CategoryService {
      * @param createCategoryRequest the request to create a new category
      * @return the created category response
      */
+    @Logging
     @Override
     @Modifying
     @Transactional
-    public CategoryResponse create(CreateCategoryRequest createCategoryRequest) {
+    public CategoryResponse createCategory(CreateCategoryRequest createCategoryRequest) {
         // validator, but nothing to validate
         log.debug("Start createCategory logo service with categoryRequest: {}", createCategoryRequest);
 
@@ -61,8 +63,9 @@ public class CategoryServiceImpl implements CategoryService {
      * @param categoryId the ID of the category
      * @return the category with products response
      */
+    @Logging
     @Override
-    public CategoryWithProductsResponse getByIdWithProducts(UUID categoryId) {
+    public CategoryWithProductsResponse getCategoryByIdWithProducts(UUID categoryId) {
         log.debug("Start CategoryServiceImpl getById service with categoryId: {}", categoryId);
 
         CategoryEntity category = categoryRepository.findByIdWithProducts(categoryId)
@@ -82,10 +85,11 @@ public class CategoryServiceImpl implements CategoryService {
      * @param logo the new logo file
      * @return the updated category response
      */
+    @Logging
     @Override
     @Modifying
     @Transactional
-    public CategoryResponse updateLogo(UUID categoryId, MultipartFile logo) {
+    public CategoryResponse updateCategoryLogo(UUID categoryId, MultipartFile logo) {
         log.debug("Start updateLogo service with categoryId={} and logo={}", categoryId, logo);
 
         CategoryEntity categoryEntity = categoryRepository.findById(categoryId)
@@ -110,8 +114,9 @@ public class CategoryServiceImpl implements CategoryService {
      *
      * @param categoryId the ID of the category
      */
+    @Logging
     @Override
-    public void delete(UUID categoryId) {
+    public void deleteCategory(UUID categoryId) {
         log.debug("Start CategoryServiceImpl delete category with id: {}", categoryId);
 
         if (Boolean.FALSE.equals(categoryRepository.existsById(categoryId))) {
@@ -129,8 +134,9 @@ public class CategoryServiceImpl implements CategoryService {
      * @param pageRequest the page request
      * @return a page of category responses
      */
-    @Transactional(readOnly = true)
+    @Logging
     @Override
+    @Transactional(readOnly = true)
     public Page<CategoryResponse> getPaginatedCategories(Pageable pageRequest) {
         return categoryRepository.findAll(pageRequest)
                 .map(categoryMapper::toCategoryResponse);
